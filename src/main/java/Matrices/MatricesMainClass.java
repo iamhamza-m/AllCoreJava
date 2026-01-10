@@ -57,23 +57,31 @@ public class MatricesMainClass {
 		
 		
 		System.out.println("=== SYMMETRIC MATRIX ===\n");
-		SymmetricMatrix sym = new SymmetricMatrix(4);
+		SymmetricMatrix sym = new SymmetricMatrix(5);
 		sym.set(0,0, 5);
 		sym.set(0,1, 2);
 		sym.set(0,2, 7);
 		sym.set(0,3, 3);
+		sym.set(0,4, 6);
+		sym.set(1,1, 3);
 		sym.set(1,2, 9);
 		sym.set(1,3, 1);
+		sym.set(1,4, 8);
+		sym.set(2,2, 2);
 		sym.set(2,3, 4);
+		sym.set(2,4, 5);
+		sym.set(3,3, 1);
+		sym.set(3,4, 9);
+		sym.set(4,4, 10);
 		
 		sym.printMatrix();
 		
 		System.out.println("=== TRIDIAGONAL MATRIX ===\n");
 		TridiagonalMatrix tri = new TridiagonalMatrix(5);
-		for (int i = 0; i < 5; i++) tri.set(i,i, 2);
+		for (int i = 0; i < 5; i++) tri.set(i,i, 10);
 		for (int i = 0; i < 4; i++) {
-			tri.set(i,i+1, -1);
-			tri.set(i+1,i, -1);
+			tri.set(i,i+1, 11);
+			tri.set(i+1,i, 9);
 		}
 		
 		tri.printMatrix();
@@ -81,7 +89,7 @@ public class MatricesMainClass {
 		
 		System.out.println("=== TOEPLITZ MATRIX ===\n");
 		ToeplitzMatrix toe = new ToeplitzMatrix(5);
-		int[] diagtoe = {10, -1, -2, -3, -4};
+		int[] diagtoe = {10, 1, 2, 3, 4};
 		for (int i = 0; i < 5; i++) {
 			toe.setFirstRow(i, diagtoe[i]);
 			toe.setFirstColumn(i, diagtoe[i]);

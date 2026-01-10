@@ -51,7 +51,7 @@ public class SymmetricMatrix {
 	public void printMatrix() {
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-				System.out.printf("%6d ", get(i, j));
+				System.out.printf("%4d ", get(i, j));
 			}
 			System.out.println();
 		}

@@ -1,34 +1,37 @@
 package Matrices;
 
-public class DiagonalMatrix {
+// LowerTriangularMatrix.java (unchanged, as it was correct)
+public class LowerTriangularMatrix {
 	private int[] data;
 	private int n;           // dimension (n × n matrix)
 	
-	public DiagonalMatrix(int n) {
+	public LowerTriangularMatrix(int n) {
 		if (n <= 0) {
 			throw new IllegalArgumentException("Matrix size must be positive");
 		}
 		this.n = n;
-		this.data = new int[n];  // only diagonal elements are stored
+		this.data = new int[n * (n + 1) / 2];
 	}
 	
+	// Convert (row,col) → 1D index (row-major, lower triangular)
 	private int index(int row, int col) {
-		if (row != col) {
-			return -1;           // off-diagonal → not stored
+		if (col > row) {
+			return -1; // zero (not stored)
 		}
-		return row;
+		// Formula: sum of complete rows above + current row elements
+		return row * (row + 1) / 2 + col;
 	}
 	
 	public void set(int row, int col, int value) {
 		if (row < 0 || col < 0 || row >= n || col >= n) {
-			throw new IndexOutOfBoundsException("Invalid indices: " + row + "," + col);
+			throw new IndexOutOfBoundsException("Invalid indices");
 		}
-		if (row != col) {
+		if (col > row) {
 			if (value != 0) {
 				throw new IllegalArgumentException(
-						"Cannot set non-zero value off the main diagonal");
+						"Cannot set non-zero value above diagonal in lower triangular matrix");
 			}
-			return;  // ignore zeros off-diagonal
+			return;
 		}
 		data[index(row, col)] = value;
 	}
@@ -37,15 +40,16 @@ public class DiagonalMatrix {
 		if (row < 0 || col < 0 || row >= n || col >= n) {
 			throw new IndexOutOfBoundsException("Invalid indices");
 		}
-		if (row != col) {
-			return 0;           // ← always return 0 for off-diagonal
+		if (col > row) {
+			return 0;
 		}
 		return data[index(row, col)];
 	}
 	
-	/**
-	 * Prints the full matrix showing actual 0s everywhere off the diagonal
-	 */
+	public int getSize() {
+		return n;
+	}
+	
 	public void print() {
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {

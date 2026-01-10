@@ -1,4 +1,4 @@
-package Interviews;
+package Interviews.SynchonyInterview;
 
 import java.util.ArrayList;
 import java.util.Comparator;

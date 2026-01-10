@@ -1,4 +1,4 @@
-package Interviews;
+package MultiThreading;
 
 /**
  * Demonstrates synchronized data sharing between threads.

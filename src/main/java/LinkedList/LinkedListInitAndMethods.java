@@ -59,8 +59,8 @@ public class LinkedListInitAndMethods {
 		}
 		System.out.println();
 		
-		// Verify list is unchanged after iteration
-		System.out.println("Element at index 1 after iteration: " + list.get(1));
+		
+		
 	}
 	
 	private static void printList(String message, LinkedList<String> list) {

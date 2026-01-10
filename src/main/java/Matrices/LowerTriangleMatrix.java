@@ -10,9 +10,9 @@ public class LowerTriangleMatrix {
 			}
 		}
 		
-		for(int i=0; i < lowerTrigMatrix.length; i++){
-			for(int j=0; j < lowerTrigMatrix[i].length; j++){
-				System.out.printf("%d ", lowerTrigMatrix[i][j]);
+		for (int[] trigMatrix : lowerTrigMatrix) {
+			for (int matrix : trigMatrix) {
+				System.out.printf("%d ", matrix);
 			}
 			System.out.println();
 		}

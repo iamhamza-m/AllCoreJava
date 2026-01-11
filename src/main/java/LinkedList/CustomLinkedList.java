@@ -34,7 +34,16 @@ class CustomLinkedList {
 	}
 }
 
+
+
 class CustomLinkedListMain {
+	static void printNodes(Node node){
+		if(node != null){
+			System.out.println(node.data);
+			printNodes(node.next);
+		}
+	}
+	
 	static void main(String[] args) {
 		
 		CustomLinkedList list = new CustomLinkedList();
@@ -50,5 +59,10 @@ class CustomLinkedListMain {
 			System.out.print(current.data + " ");
 			current = current.next; // Move to the next node
 		}
+		
+		System.out.println();
+		
+		System.out.println("Using recursion");
+		CustomLinkedListMain.printNodes(list.head);
 	}
 }

@@ -356,7 +356,28 @@ class CustomLinkedListMain {
 		printWithMessage("Merged (iterative):          ", mergedIter);
 		
 		// Recursive merge on fresh copies
-		Node mergedRec = mergeSortedListsRecursive(new Node(1), new Node(2));
+		CustomLinkedList sorted3 = new CustomLinkedList();
+		sorted3.add(2);
+		sorted3.add(5);
+		sorted3.add(8);
+		sorted3.add(13);
+		sorted3.add(21);
+		
+		CustomLinkedList sorted4 = new CustomLinkedList();
+		sorted4.add(3);
+		sorted4.add(6);
+		sorted4.add(9);
+		sorted4.add(16);
+		sorted4.add(26);
+		
+		System.out.println("Sorted List 3:               ");
+		printNodes(sorted3.head);
+		System.out.println();
+		
+		System.out.println("Sorted List 4:               ");
+		printNodes(sorted4.head);
+		System.out.println();
+		Node mergedRec = mergeSortedListsRecursive(sorted3.head, sorted4.head);
 		printWithMessage("Merged (recursive - small):  ", mergedRec);
 	}
 }

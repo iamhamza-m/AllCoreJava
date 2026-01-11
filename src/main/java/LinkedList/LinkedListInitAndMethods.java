@@ -59,7 +59,8 @@ public class LinkedListInitAndMethods {
 		}
 		System.out.println();
 		
-		
+		//Count nodes in LinkedList
+		System.out.println("Total nodes are: " + list.size());
 		
 	}
 	

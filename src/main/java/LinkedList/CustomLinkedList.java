@@ -2,6 +2,9 @@ package LinkedList;
 
 import java.util.HashSet;
 
+/**
+ * Basic Node for singly linked list
+ */
 class Node {
 	int data;
 	Node next;
@@ -12,6 +15,9 @@ class Node {
 	}
 }
 
+/**
+ * Simple wrapper to hold the head
+ */
 class CustomLinkedList {
 	Node head;
 	
@@ -29,14 +35,25 @@ class CustomLinkedList {
 	}
 }
 
+/**
+ * All utility methods for linked list operations
+ */
 class CustomLinkedListMain {
 	
-	static void printNodes(Node node){
-		if(node != null){
+	static void printNodes(Node node) {
+		if (node != null) {
 			System.out.print(node.data + " ");
 			printNodes(node.next);
 		}
 	}
+	
+	static void printWithMessage(String message, Node head) {
+		System.out.print(message);
+		printNodes(head);
+		System.out.println();
+	}
+	
+	// ====================== INSERTION / DELETION ======================
 	
 	static Node addNewNode(Node head, int data, int index) {
 		if (index < 0) {
@@ -46,26 +63,22 @@ class CustomLinkedListMain {
 		
 		Node newNode = new Node(data);
 		
-		// Case 1: Insert at beginning (index 0)
+		// Insert at beginning
 		if (index == 0) {
 			newNode.next = head;
 			return newNode;
 		}
 		
-		// Case 2: Insert somewhere in the middle or end
 		Node current = head;
 		int position = 0;
 		
-		// Go to the node just before where we want to insert
 		while (current != null && position < index - 1) {
 			current = current.next;
 			position++;
 		}
 		
-		// If index is too large → we reached end of list
 		if (current == null) {
-			System.out.println("Index " + index + " is out of range. Appending at end.");
-			// Find last node and append
+			System.out.println("Index " + index + " out of range. Appending at end.");
 			Node temp = head;
 			while (temp.next != null) {
 				temp = temp.next;
@@ -74,16 +87,13 @@ class CustomLinkedListMain {
 			return head;
 		}
 		
-		// Normal insertion
 		newNode.next = current.next;
 		current.next = newNode;
 		
 		return head;
 	}
 	
-	
 	static Node deletingNode(Node head, int index) {
-		
 		if (head == null) {
 			return null;
 		}
@@ -100,12 +110,10 @@ class CustomLinkedListMain {
 			position++;
 		}
 		
-		if(current.next == null && position < index - 1){
-			System.out.printf("The given index is too big removing %d position(last) now", position );
-			System.out.println();
-			
+		if (current.next == null && position < index - 1) {
+			System.out.printf("Index too big, removing last node (position %d)%n", position);
 			Node temp = head;
-			while (temp.next.next != null){
+			while (temp.next.next != null) {
 				temp = temp.next;
 			}
 			temp.next = null;
@@ -119,12 +127,13 @@ class CustomLinkedListMain {
 		return head;
 	}
 	
+	// ====================== PROPERTIES ======================
 	
-	static boolean isSorted(Node head){
+	static boolean isSorted(Node head) {
 		boolean sorted = true;
 		Node current = head;
-		while (current.next.next != null){
-			if(current.data > current.next.data){
+		while (current.next != null) {  // Fixed safe condition (your original had .next.next)
+			if (current.data > current.next.data) {
 				sorted = false;
 				break;
 			}
@@ -133,35 +142,32 @@ class CustomLinkedListMain {
 		return sorted;
 	}
 	
-	//Oder of n^2.
+	// ====================== REMOVE DUPLICATES ======================
+	
+	// Brute force - O(n²)
 	static Node removeDuplicates(Node head) {
-		
-		if(head == null) return null;
+		if (head == null) return null;
 		
 		Node current = head;
 		
-		while (current != null){
-			
+		while (current != null) {
 			Node runner = current;
 			
-			while ( runner.next != null ){
-				if (runner.next.data == current.data){
+			while (runner.next != null) {
+				if (runner.next.data == current.data) {
 					runner.next = runner.next.next;
-				}else{
+				} else {
 					runner = runner.next;
 				}
-				
 			}
-			
 			current = current.next;
 		}
 		
 		return head;
 	}
 	
-	//Order of n + Space Order of n
+	// Better - O(n) time + O(n) space
 	static Node removeDuplicatesBetter(Node head) {
-		
 		if (head == null) return null;
 		
 		HashSet<Integer> seen = new HashSet<>();
@@ -170,10 +176,10 @@ class CustomLinkedListMain {
 		
 		while (current != null) {
 			if (seen.contains(current.data)) {
-				prev.next = current.next;   // delete duplicate
+				prev.next = current.next;
 			} else {
 				seen.add(current.data);
-				prev = current;             // move prev only when not deleting
+				prev = current;
 			}
 			current = current.next;
 		}
@@ -181,24 +187,24 @@ class CustomLinkedListMain {
 		return head;
 	}
 	
-	//Order of n
+	// ====================== REVERSE ======================
+	
 	static Node reverseList(Node head) {
 		Node high = head;
 		Node mid = null;
 		Node low;
 		
-		while ( high != null){
+		while (high != null) {
 			low = mid;
 			mid = high;
 			high = high.next;
 			mid.next = low;
 		}
 		
-		return mid; // High is on null hence mid becomes the first now post changing the links.
+		return mid;
 	}
 	
 	static Node reverseListRecursive(Node head) {
-		
 		if (head == null || head.next == null) {
 			return head;
 		}
@@ -210,56 +216,147 @@ class CustomLinkedListMain {
 		return newHead;
 	}
 	
+	// ====================== CONCAT & MERGE ======================
+	
+	static void concatenation(Node first, Node second) {
+		if (first == null) {
+			first = second;
+			return;
+		}
+		
+		Node temp = first;
+		while (temp.next != null) {
+			temp = temp.next;
+		}
+		temp.next = second;
+	}
+	
+	static Node mergeSortedLists(Node l1, Node l2) {
+		if (l1 == null) return l2;
+		if (l2 == null) return l1;
+		
+		Node head;
+		Node tail;
+		
+		if (l1.data <= l2.data) {
+			head = l1;
+			l1 = l1.next;
+		} else {
+			head = l2;
+			l2 = l2.next;
+		}
+		
+		tail = head;
+		
+		while (l1 != null && l2 != null) {
+			if (l1.data <= l2.data) {
+				tail.next = l1;
+				l1 = l1.next;
+			} else {
+				tail.next = l2;
+				l2 = l2.next;
+			}
+			tail = tail.next;
+		}
+		
+		tail.next = (l1 != null) ? l1 : l2;
+		
+		return head;
+	}
+	
+	static Node mergeSortedListsRecursive(Node l1, Node l2) {
+		if (l1 == null) return l2;
+		if (l2 == null) return l1;
+		
+		if (l1.data <= l2.data) {
+			l1.next = mergeSortedListsRecursive(l1.next, l2);
+			return l1;
+		} else {
+			l2.next = mergeSortedListsRecursive(l1, l2.next);
+			return l2;
+		}
+	}
+	
+	// ====================== MAIN DEMO ======================
 	public static void main(String[] args) {
 		CustomLinkedList list = new CustomLinkedList();
 		
-		list.add(10);
-		list.add(20);
-		list.add(30);
-		list.add(31);
-		list.add(32);
-		list.add(32);
-		list.add(32);
-		list.add(32);
+		// More reasonable values
+		int[] values = {10, 20, 30, 40, 50, 60, 70, 50, 30, 10};
+		for (int val : values) {
+			list.add(val);
+		}
 		
-		System.out.print("Original list: ");
-		printNodes(list.head);
+		printWithMessage("Original list:               ", list.head);
+		
+		list.head = addNewNode(list.head, 5, 0);
+		printWithMessage("After add 5 at index 0:      ", list.head);
+		
+		list.head = addNewNode(list.head, 25, 3);
+		printWithMessage("After add 25 at index 3:     ", list.head);
+		
+		list.head = addNewNode(list.head, 100, 15); // will append
+		printWithMessage("After add 100 at index 15:   ", list.head);
+		
+		list.head = deletingNode(list.head, 4);
+		printWithMessage("After delete index 4:        ", list.head);
+		
+		System.out.println("Is sorted?                   " + isSorted(list.head));
 		System.out.println();
-		
-		// Examples of usage:
-		list.head = addNewNode(list.head, 5, 0);     // at beginning
-		System.out.print("After add 5 at index 0:   ");
-		printNodes(list.head);
-		System.out.println();
-		
-		list.head = addNewNode(list.head, 15, 2);    // between 10 and 20
-		System.out.print("After add 15 at index 2:  ");
-		printNodes(list.head);
-		System.out.println();
-		
-		list.head = addNewNode(list.head, 99, 10);   // too big → append
-		System.out.print("After add 99 at index 10: ");
-		printNodes(list.head);
-		System.out.println();
-		
-		
-		
-		list.head = deletingNode(list.head, 10);
-		System.out.print("After deletion : ");
-		printNodes(list.head);
-		System.out.println();
-		
-		System.out.println("Is this array sorted: " + isSorted(list.head));
 		
 		list.head = removeDuplicates(list.head);
-		System.out.println("After removing duplicates: ");
-		printNodes(list.head);
-		System.out.println();
+		printWithMessage("After removeDuplicates:      ", list.head);
 		
 		list.head = reverseList(list.head);
-		System.out.println("After reversing: ");
-		printNodes(list.head);
+		printWithMessage("After reverse (iterative):   ", list.head);
+		
+		list.head = reverseListRecursive(list.head);
+		printWithMessage("After reverse (recursive):   ", list.head);
+		
+		// Second list for concat/merge demo
+		CustomLinkedList list2 = new CustomLinkedList();
+		int[] values2 = {15, 25, 35, 45, 55, 65};
+		for (int val : values2) {
+			list2.add(val);
+		}
+		
+		System.out.println("\nSecond list:                 ");
+		printNodes(list2.head);
 		System.out.println();
 		
+		// Concatenation demo
+		Node concatHead = list.head;
+		concatenation(concatHead, list2.head);
+		printWithMessage("After concatenation:         ", concatHead);
+		
+		// Merge demo with two sorted lists
+		CustomLinkedList sorted1 = new CustomLinkedList();
+		sorted1.add(1);
+		sorted1.add(4);
+		sorted1.add(7);
+		sorted1.add(12);
+		sorted1.add(20);
+		
+		CustomLinkedList sorted2 = new CustomLinkedList();
+		sorted2.add(2);
+		sorted2.add(5);
+		sorted2.add(8);
+		sorted2.add(15);
+		sorted2.add(25);
+		
+		System.out.println("Sorted List 1:               ");
+		printNodes(sorted1.head);
+		System.out.println();
+		
+		System.out.println("Sorted List 2:               ");
+		printNodes(sorted2.head);
+		System.out.println();
+		
+		Node mergedIter = mergeSortedLists(sorted1.head, sorted2.head);
+		printWithMessage("Merged (iterative):          ", mergedIter);
+		
+		// Recursive merge on fresh copies
+		Node mergedRec = mergeSortedListsRecursive(new Node(1), new Node(2));
+		printWithMessage("Merged (recursive - small):  ", mergedRec);
 	}
 }

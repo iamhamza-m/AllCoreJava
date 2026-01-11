@@ -1,5 +1,7 @@
 package LinkedList;
 
+import java.util.HashSet;
+
 class Node {
 	int data;
 	Node next;
@@ -131,6 +133,83 @@ class CustomLinkedListMain {
 		return sorted;
 	}
 	
+	//Oder of n^2.
+	static Node removeDuplicates(Node head) {
+		
+		if(head == null) return null;
+		
+		Node current = head;
+		
+		while (current != null){
+			
+			Node runner = current;
+			
+			while ( runner.next != null ){
+				if (runner.next.data == current.data){
+					runner.next = runner.next.next;
+				}else{
+					runner = runner.next;
+				}
+				
+			}
+			
+			current = current.next;
+		}
+		
+		return head;
+	}
+	
+	//Order of n + Space Order of n
+	static Node removeDuplicatesBetter(Node head) {
+		
+		if (head == null) return null;
+		
+		HashSet<Integer> seen = new HashSet<>();
+		Node current = head;
+		Node prev = null;
+		
+		while (current != null) {
+			if (seen.contains(current.data)) {
+				prev.next = current.next;   // delete duplicate
+			} else {
+				seen.add(current.data);
+				prev = current;             // move prev only when not deleting
+			}
+			current = current.next;
+		}
+		
+		return head;
+	}
+	
+	//Order of n
+	static Node reverseList(Node head) {
+		Node high = head;
+		Node mid = null;
+		Node low;
+		
+		while ( high != null){
+			low = mid;
+			mid = high;
+			high = high.next;
+			mid.next = low;
+		}
+		
+		return mid; // High is on null hence mid becomes the first now post changing the links.
+	}
+	
+	static Node reverseListRecursive(Node head) {
+		
+		if (head == null || head.next == null) {
+			return head;
+		}
+		
+		Node newHead = reverseListRecursive(head.next);
+		head.next.next = head;
+		head.next = null;
+		
+		return newHead;
+	}
+	
 	public static void main(String[] args) {
 		CustomLinkedList list = new CustomLinkedList();
 		
@@ -138,6 +217,9 @@ class CustomLinkedListMain {
 		list.add(20);
 		list.add(30);
 		list.add(31);
+		list.add(32);
+		list.add(32);
+		list.add(32);
 		list.add(32);
 		
 		System.out.print("Original list: ");
@@ -168,5 +250,16 @@ class CustomLinkedListMain {
 		System.out.println();
 		
 		System.out.println("Is this array sorted: " + isSorted(list.head));
+		
+		list.head = removeDuplicates(list.head);
+		System.out.println("After removing duplicates: ");
+		printNodes(list.head);
+		System.out.println();
+		
+		list.head = reverseList(list.head);
+		System.out.println("After reversing: ");
+		printNodes(list.head);
+		System.out.println();
+		
 	}
 }

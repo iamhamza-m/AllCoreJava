@@ -277,6 +277,84 @@ class CustomLinkedListMain {
 		}
 	}
 	
+	// ====================== LOOP CHECK ======================
+	
+	static boolean isLoopList(Node head){
+		boolean isLoop = false;
+		
+		Node slowPointer = head;
+		Node fastPointer = head;
+		
+		while (slowPointer != null && fastPointer != null){
+			slowPointer = slowPointer.next;
+			fastPointer = fastPointer.next;
+			
+			fastPointer = fastPointer.next == null ? null : fastPointer.next;
+			
+			if(slowPointer == fastPointer){
+				isLoop = true;
+				break;
+			}
+			
+		}
+		
+		return isLoop;
+	}
+	
+	// ====================== DISPLAY CIRCULAR LIST ===========
+	
+	static int flag = 0;
+	static void displayCircularLinkedList(Node head){
+		Node iterator = head;
+		do {
+			System.out.print(iterator.data + " ");
+			iterator = iterator.next;
+		} while (iterator != head);
+	}
+	
+	// ====================== DELETING FROM CIRCULAR LIST =====
+	
+	static Node deletingNodeInCircular(Node head){
+		if (head == null) {
+			return null;
+		}
+		
+		//Only one node
+		if(head.next == null){
+			return null;
+		}
+		
+		//Last node
+		Node temp = head;
+		while(temp.next != head){
+			temp = temp.next;
+		}
+		
+		//Temp was on the last element.
+		//That means the last element now points to head.next.
+		//Also, the head now points to head.next.
+		//This way we have successfully removed the head.
+		temp.next = head.next;
+		head = head.next;
+		
+		return head;
+	}
+	
+	// ====================== ADDING INTO CIRCULAR LIST ======
+	
+	static Node addingNodeInCircular(Node head, Node insert){
+		
+		Node current = head;
+		while (current.next != head){
+			current = current.next;
+		}
+		
+		current.next = insert;
+		insert.next = head;
+		
+		return insert;
+	}
+	
 	// ====================== MAIN DEMO ======================
 	public static void main(String[] args) {
 		CustomLinkedList list = new CustomLinkedList();
@@ -379,5 +457,54 @@ class CustomLinkedListMain {
 		System.out.println();
 		Node mergedRec = mergeSortedListsRecursive(sorted3.head, sorted4.head);
 		printWithMessage("Merged (recursive - small):  ", mergedRec);
+		
+		
+		Node a = new Node(1);
+		Node b = new Node(2);
+		Node c = new Node(3);
+		Node d = new Node(4);
+		
+		a.next = b;
+		b.next = c;
+		c.next = d;
+		d.next = a;
+		
+		System.out.println("Is this list a loop ? " + isLoopList(a));
+		
+		Node e = new Node(1);
+		Node f = new Node(2);
+		Node g = new Node(3);
+		Node h = new Node(4);
+		
+		e.next = f;
+		f.next = g;
+		g.next = h;
+		h.next = null;
+		
+		System.out.println("Is this list a loop ? " + isLoopList(e));
+		
+		Node i = new Node(54);
+		Node j = new Node(78);
+		Node k = new Node(90);
+		Node l = new Node(23);
+		
+		i.next = j;
+		j.next = k;
+		k.next = l;
+		l.next = i;
+		
+		System.out.println("Displaying a circular linkedList : ");
+		displayCircularLinkedList(i);
+		System.out.println();
+		
+		i = deletingNodeInCircular(i);
+		System.out.println("Displaying a circular linkedList post deletion : ");
+		displayCircularLinkedList(i);
+		
+		System.out.println();
+		
+		i = addingNodeInCircular(i, new Node(77));
+		System.out.println("Adding a new node in circular list: ");
+		displayCircularLinkedList(i);
 	}
 }

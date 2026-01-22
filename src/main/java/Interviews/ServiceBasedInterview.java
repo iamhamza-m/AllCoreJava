@@ -3,7 +3,7 @@ package Interviews;
 /**
  * ITC Interview: Sort array of 0s, 1s, 2s using Dutch National Flag algorithm.
  */
-public class ITCInterview {
+public class ServiceBasedInterview {
 	
 	public static void swapNums(int[] arr, int first, int second) {
 		int temp = arr[first];

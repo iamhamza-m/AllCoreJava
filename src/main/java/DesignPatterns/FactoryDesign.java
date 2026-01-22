@@ -3,40 +3,34 @@ package DesignPatterns;
 /**
  * Demonstrates Factory pattern: Creates objects without specifying the exact class.
  */
-interface car {
+
+interface Carz {
 	void drive();
 }
 
-class sedan implements car {
-	@Override
+class Sedan implements Carz {
 	public void drive() {
 		System.out.println("This car is a sedan");
 	}
 }
 
-class suv implements car {
-	@Override
+class Suv implements Carz {
 	public void drive() {
 		System.out.println("This car is an suv");
 	}
 }
 
-class carfactory {
-	
-	public static car carFactoryMethod(String type) {
-		if ("Sedan".equalsIgnoreCase(type))
-			return new sedan();
-		else if ("Suv".equalsIgnoreCase(type))
-			return new suv();
-		
-		else
-			throw new IllegalArgumentException("Unknown type");
+class CarFactory {
+	public static Carz carFactoryMethod(String type) {
+		if ("sedan".equalsIgnoreCase(type)) return new Sedan();
+		if ("suv".equalsIgnoreCase(type)) return new Suv();
+		throw new IllegalArgumentException("Unknown type");
 	}
 }
 
 public class FactoryDesign {
 	public static void main(String[] args) {
-		car car = carfactory.carFactoryMethod("sedan");
+		Carz car = CarFactory.carFactoryMethod("sedan");
 		car.drive();
 	}
 }

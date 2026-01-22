@@ -9,7 +9,7 @@ interface Vehicle {
 
 class BMW implements Vehicle {
 	public void drive() {
-		System.out.println("Driving Lamborghini");  // Note: Original says Lamborghini, but class is BMW – possible typo, kept as is
+		System.out.println("Driving BMW");  // Note: Original says Lamborghini, but class is BMW – possible typo, kept as is
 	}
 }
 
@@ -22,11 +22,11 @@ class SportBMW implements Vehicle {
 	
 	public void drive() {
 		vehicle.drive();  // Delegate to wrapped object
-		System.out.println("Sport mode ON");
+		System.out.println("Sport mode ON"); // Adding new functionalities dynamically.
 	}
 }
 
-class Main {
+class DecoratorMain {
 	public static void main(String[] args) {
 		BMW bmw = new BMW();
 		Vehicle car = new SportBMW(bmw);

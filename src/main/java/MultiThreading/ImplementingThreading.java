@@ -1,14 +1,14 @@
-package multithreading;
+package MultiThreading;
 
 /**
  * Demonstrates running multiple threads and measuring time.
  */
-public class ImplementingThreaading {
-    public static void main(String[] args) {
+public class ImplementingThreading {
+    public static void main(String[] args) throws InterruptedException {
         long startTime = System.currentTimeMillis();
         
-        ThreadSecond t1 = new ThreadSecond();
-        ThreadFirst t2 = new ThreadFirst();
+       ThreadSecond t1 = new ThreadSecond();
+       ThreadFirst t2 = new ThreadFirst();
         System.out.println("Starting first thread");
         t1.start();
         System.out.println("Starting second thread");

@@ -2,8 +2,7 @@ package DesignPatterns;
 
 /**
  * Implements Singleton pattern: Ensures only one instance of the class.
- * This method is kept public because it will be called to initialize the object
- * from outside the class.
+ * This method is kept public because it will be called to initialize the object from outside the class.
  */
 public class SingletonPattern {
 	private static SingletonPattern instance;

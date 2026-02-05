@@ -49,10 +49,7 @@ public class SingletonAndBreakingIt implements Serializable, Cloneable {
 class SingletonAndBreakingMain {
 	static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, IOException, ClassNotFoundException {
 		
-		SingletonAndBreakingIt breakingInstance;
-		
 		//Thread Attack.
-		
 		Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
@@ -80,7 +77,7 @@ class SingletonAndBreakingMain {
 		//Reflection Attack.
 		Constructor<SingletonAndBreakingIt> breakingItConstructor = SingletonAndBreakingIt.class.getDeclaredConstructor();
 		breakingItConstructor.setAccessible(true);
-		breakingInstance = breakingItConstructor.newInstance();
+		SingletonAndBreakingIt breakingInstance = breakingItConstructor.newInstance();
 		System.out.println(breakingInstance.hashCode());
 		
 		

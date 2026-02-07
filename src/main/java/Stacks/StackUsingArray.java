@@ -2,26 +2,33 @@ package Stacks;
 
 import java.util.Scanner;
 
-class StackBase {
-	int size;
-	int top;
-	int[] array;
+class ArrayStack {
 	
-	// Constructor to keep initialization in one place
-	StackBase(int size) {
-		this.size = size;
-		this.array = new int[size];
+	private int[] array;
+	private int top;
+	private int capacity;
+	
+	// Constructor
+	public ArrayStack(int capacity) {
+		if (capacity <= 0) {
+			throw new IllegalArgumentException("Stack size must be greater than 0");
+		}
+		this.capacity = capacity;
+		this.array = new int[capacity];
 		this.top = -1;
 	}
 	
+	// Check if stack is empty
 	public boolean isEmpty() {
 		return top == -1;
 	}
 	
+	// Check if stack is full
 	public boolean isFull() {
-		return top == size - 1;
+		return top == capacity - 1;
 	}
 	
+	// Push element onto stack
 	public void push(int data) {
 		if (isFull()) {
 			throw new RuntimeException("Stack overflow");
@@ -29,42 +36,45 @@ class StackBase {
 		array[++top] = data;
 	}
 	
+	// Pop element from stack
 	public int pop() {
 		if (isEmpty()) {
-			throw new RuntimeException("Stack is empty");
+			throw new RuntimeException("Stack underflow");
 		}
 		return array[top--];
 	}
 	
+	// Peek top element
+	public int peek() {
+		if (isEmpty()) {
+			throw new RuntimeException("Stack is empty");
+		}
+		return array[top];
+	}
+	
+	// Print stack (top to bottom)
 	public void printStack() {
 		if (isEmpty()) {
 			System.out.println("Stack is empty");
 			return;
 		}
 		
-		for (int i = 0; i <= top; i++) {
+		for (int i = top; i >= 0; i--) {
 			System.out.print(array[i] + " ");
 		}
 		System.out.println();
 	}
-	
-	public void peek(int index){
-		if(index > top){
-			throw new RuntimeException("The index you are searching is out of bound");
-		}
-		
-		System.out.printf("The element as %d index is : %d", index, array[index]);
-	}
 }
 
 public class StackUsingArray {
+	
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		
-		System.out.println("Enter your stack size");
+		System.out.print("Enter stack size: ");
 		int size = input.nextInt();
 		
-		StackBase stack = new StackBase(size);
+		ArrayStack stack = new ArrayStack(size);
 		
 		stack.push(10);
 		stack.push(12);
@@ -72,9 +82,10 @@ public class StackUsingArray {
 		
 		stack.printStack();
 		
-		stack.pop();
+		System.out.println("Popped: " + stack.pop());
 		
 		stack.printStack();
-		stack.peek(2);
+		
+		System.out.println("Top element: " + stack.peek());
 	}
 }

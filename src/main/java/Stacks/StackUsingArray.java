@@ -47,6 +47,14 @@ class StackBase {
 		}
 		System.out.println();
 	}
+	
+	public void peek(int index){
+		if(index > top){
+			throw new RuntimeException("The index you are searching is out of bound");
+		}
+		
+		System.out.printf("The element as %d index is : %d", index, array[index]);
+	}
 }
 
 public class StackUsingArray {
@@ -67,5 +75,6 @@ public class StackUsingArray {
 		stack.pop();
 		
 		stack.printStack();
+		stack.peek(2);
 	}
 }

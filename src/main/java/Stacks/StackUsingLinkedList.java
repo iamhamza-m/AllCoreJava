@@ -66,7 +66,7 @@ public class StackUsingLinkedList {
 		
 		System.out.println();
 		
-		stackList.peek();
+		System.out.println(" " + stackList.peek());
 	}
 	
 }

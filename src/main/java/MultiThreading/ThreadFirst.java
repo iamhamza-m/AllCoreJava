@@ -1,4 +1,4 @@
-package multithreading;
+package MultiThreading;
 
 /**
  * Thread that prints * with numbers.

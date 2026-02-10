@@ -12,9 +12,8 @@ class DeadlockDemo {
 		
 		Thread t1 = new Thread(() -> {
 			synchronized (lock1) {
-				System.out.println("Thread-1 got lock1");
 				try {
-					Thread.sleep(100);
+					System.out.println("Thread-1 got lock1");
 				} catch (Exception e) {
 					System.out.println("Exception thrown" + e);
 				}
@@ -27,9 +26,8 @@ class DeadlockDemo {
 		
 		Thread t2 = new Thread(() -> {
 			synchronized (lock2) {
-				System.out.println("Thread-2 got lock2");
 				try {
-					Thread.sleep(100);
+					System.out.println("Thread-2 got lock2");
 				} catch (Exception e) {
 					System.out.println("Exception thrown" + e);
 				}

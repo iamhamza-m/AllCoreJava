@@ -1,8 +1,9 @@
-package Interviews.SynchonyInterview;
+package Interviews.USBankInterview;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Employee class with methods for calculations like average salary, least paid, oldest, etc.
@@ -51,6 +52,16 @@ public class EmployeeClass {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	@Override
+	public String toString() {
+		return "EmployeeClass{" +
+					   "name='" + name + '\'' +
+					   ", age=" + age +
+					   ", salary=" + salary +
+					   ", email='" + email + '\'' +
+					   '}';
+	}
 }
 
 class EmployeeMethods {
@@ -73,22 +84,30 @@ class EmployeeMethods {
 		EmployeeClass longestName = employees.stream().max(Comparator.comparingInt(e -> e.getName().length())).orElse(null);
 		System.out.println("Longest name: " + (longestName != null ? longestName.getName() : "None"));
 	}
+	
+	public static List<EmployeeClass>  orderBySalary(List<EmployeeClass> employees){
+		return employees.stream()
+					   .sorted(Comparator.comparingInt(EmployeeClass::getSalary).reversed())
+					   .collect(Collectors.toList());
+	}
 }
 
 class EmployeeMain {
 	public static void main(String[] args) {
 		List<EmployeeClass> EmployeeList = new ArrayList<>();
-		EmployeeList.add(new EmployeeClass("Anu", 12, 34567, "Anu@gmail.com"));
-		EmployeeList.add(new EmployeeClass("Manu", 13, 456543, "Manu@gmail.com"));
-		EmployeeList.add(new EmployeeClass("Sanu", 14, 567654, "Sanu@gmail.com"));
-		EmployeeList.add(new EmployeeClass("Gunu", 15, 45654, "Gunu@gmail.com"));
-		EmployeeList.add(new EmployeeClass("Monu", 15, 45654, "Monu@gmail.com"));
-		EmployeeList.add(new EmployeeClass("Montyyio", 16, 546754, "Monty@gmail.com"));
-		EmployeeList.add(new EmployeeClass("Sunil", 17, 234223, "Sunil@gmail.com"));
+		EmployeeList.add(new EmployeeClass("Anu", 12, 1, "Anu@gmail.com"));
+		EmployeeList.add(new EmployeeClass("Manu", 13, 2, "Manu@gmail.com"));
+		EmployeeList.add(new EmployeeClass("Sanu", 14, 3, "Sanu@gmail.com"));
+		EmployeeList.add(new EmployeeClass("Gunu", 15, 4, "Gunu@gmail.com"));
+		EmployeeList.add(new EmployeeClass("Monu", 15, 5, "Monu@gmail.com"));
+		EmployeeList.add(new EmployeeClass("Montyyio", 16, 6, "Monty@gmail.com"));
+		EmployeeList.add(new EmployeeClass("Sunil", 17, 7, "Sunil@gmail.com"));
 		
 		EmployeeMethods.calculateSalaryAverage(EmployeeList);
 		EmployeeMethods.leastPaidEmployee(EmployeeList);
 		EmployeeMethods.oldestEmployee(EmployeeList);
 		EmployeeMethods.lengthiestName(EmployeeList);
+		
+		System.out.println("The ordered list by employee salary is " + EmployeeMethods.orderBySalary(EmployeeList));
 	}
 }

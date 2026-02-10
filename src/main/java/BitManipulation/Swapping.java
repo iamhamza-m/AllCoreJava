@@ -1,4 +1,4 @@
-package designpatterns;
+package BitManipulation;
 
 import java.nio.charset.StandardCharsets;
 
@@ -26,7 +26,7 @@ public class Swapping {
         
         System.out.println(a + " " + b);
         
-        byte[] bytes = {72, 101, 108, 108, 111, 25, 1};
+        byte[] bytes = {72, 101, 108, 108, 111, 25};
         
         String str = new String(bytes, StandardCharsets.UTF_8);
         System.out.println(str);

@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * EY Interview questions: Find first non-repeating character.
  */
-public class EYInterview {
+public class BIG4Interview {
 	public static void main(String[] args) {
 		/**
 		 * first non-repeating character

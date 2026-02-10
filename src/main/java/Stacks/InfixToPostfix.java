@@ -4,8 +4,6 @@
 
 package Stacks;
 
-import java.util.Arrays;
-
 class NodeInfixToPostfix {
 	char data;
 	NodeInfixToPostfix next;

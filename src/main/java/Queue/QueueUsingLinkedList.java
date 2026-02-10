@@ -3,48 +3,45 @@ package Queue;
 class QueueNode{
 	int data;
 	QueueNode next;
-	int size;
 	QueueNode(int data){
 		this.data = data;
 		this.next = null;
-		this.size = 0;
 	}
 }
 
 class CustomQueueLinkedList{
-	QueueNode head;
+	QueueNode front;
+	QueueNode rear;
 	
 	void enqueue(int data){
 		QueueNode newNode = new QueueNode(data);
-		if(head == null){
-			newNode.next = null;
-			head = newNode;
+		if(rear == null){
+			front = rear = newNode;
 			return;
 		}
 		
-		QueueNode current = head;
-		while (current.next != null){
-			current = current.next;
-		}
-		
-		newNode.next = null;
-		current.next = newNode;
+		rear.next = newNode;
+		rear = newNode;
 	}
 	
 	int dequeue(){
 		if(isEmpty())
 			throw new RuntimeException("Queue is empty");
-		int value = head.data;
-		head = head.next;
+		int value = front.data;
+		front = front.next;
+		
+		if(front == null)
+			rear = null;
+		
 		return value;
 	}
 	
 	boolean isEmpty(){
-		return head == null;
+		return front == null;
 	}
 	
 	void printQueue(){
-		QueueNode current = head;
+		QueueNode current = front;
 		while (current != null){
 			System.out.println(current.data);
 			current = current.next;

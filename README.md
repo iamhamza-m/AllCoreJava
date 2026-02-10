@@ -19,7 +19,7 @@ This repository contains organized Java code examples for various topics includi
 - **MultiThreading**: Threading basics.
 - **OOP**: OOP concepts like classes, final, static.
 - **Optionals**: Optional class examples.
-- **Queues**: Queue testing.
+- **Queue**: Queue testing.
 - **Recursion**: Recursive algorithms.
 - **Searching**: Search algorithms.
 - **Sets**: Set operations.

@@ -1,9 +1,8 @@
 package Queue;
 
-
 public class QueueUsingArray {
 	
-	private int[] queue;
+	private final int[] queue;
 	private int front, rear, size;
 	private final int capacity;
 	

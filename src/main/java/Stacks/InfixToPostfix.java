@@ -65,7 +65,7 @@ public class InfixToPostfix {
 	static void main(String[] args) {
 		CustomInfixToPostfix list = new CustomInfixToPostfix();
 
-		char[] infix = {'a','+','b','*','c','/','d','+','e'};
+		char[] infix = {'a','+','b','*','c','/','d','-','e'};
 		
 		StringBuilder postfix = new StringBuilder();
 		
@@ -75,8 +75,7 @@ public class InfixToPostfix {
 			}
 			
 			else {
-				while (!list.isEmpty() &&
-							   list.precedence(c) <= list.precedence(list.peek())) {
+				while (!list.isEmpty() && list.precedence(c) <= list.precedence(list.peek())) {
 					postfix.append(list.pop());
 				}
 				list.push(c);

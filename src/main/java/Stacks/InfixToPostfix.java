@@ -1,3 +1,7 @@
+/**
+ * This code shows how infix to postfix can be implemented using a custom-made stack.
+ * */
+
 package Stacks;
 
 import java.util.Arrays;

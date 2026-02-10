@@ -17,7 +17,7 @@ class CustomQueueLinkedList{
 	void enqueue(int data){
 		QueueNode newNode = new QueueNode(data);
 		if(head == null){
-			newNode.next = head;
+			newNode.next = null;
 			head = newNode;
 			return;
 		}
@@ -27,7 +27,7 @@ class CustomQueueLinkedList{
 			current = current.next;
 		}
 		
-		newNode.next = current.next;
+		newNode.next = null;
 		current.next = newNode;
 	}
 	

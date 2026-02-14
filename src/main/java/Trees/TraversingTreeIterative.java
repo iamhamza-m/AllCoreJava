@@ -104,6 +104,12 @@ class TraverseTreeClass {
 			System.out.print(" " + stack2.pop().data);
 		}
 	}
+	
+	int countNodes(TraverseNodeIterative root) {
+		if (root == null) return 0;
+		
+		return 1 + countNodes(root.left) + countNodes(root.right);
+	}
 }
 
 public class TraversingTreeIterative {
@@ -123,5 +129,8 @@ public class TraversingTreeIterative {
 		
 		System.out.println("\nPostorder (Iterative):");
 		tree.postOrderTraversal(root);
+		
+		System.out.println("Total nodes");
+		tree.countNodes(root);
 	}
 }

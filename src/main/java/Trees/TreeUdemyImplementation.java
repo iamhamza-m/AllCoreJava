@@ -46,9 +46,15 @@ public class TreeUdemyImplementation {
 		}
 	}
 	
+	static int countNodes(TreeLinked root) {
+		if (root == null) return 0;
+		return 1 + countNodes(root.left) + countNodes(root.right);
+	}
+	
 	static void main(String[] args) {
 		int[] values = {1,3,4,5,67,2,1,3,1};
 		TreeLinked root = buildTree(values);
 		traverse(root);
+		System.out.println("\n Total nodes are " + countNodes(root));
 	}
 }

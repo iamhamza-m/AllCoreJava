@@ -32,6 +32,12 @@ class TreeImplementation{
 		return root;
 	}
 	
+	int countNodes(TreeNode root) {
+		if (root == null) return 0;
+		
+		return 1 + countNodes(root.left) + countNodes(root.right);
+	}
+	
 }
 
 public class TreeUsingLinkedNode {
@@ -39,5 +45,6 @@ public class TreeUsingLinkedNode {
 		TreeImplementation tree = new TreeImplementation();
 		Scanner scanner = new Scanner(System.in);
 		TreeNode root = tree.createTree(scanner, true);
+		System.out.println(" \n " + tree.countNodes(root));
 	}
 }

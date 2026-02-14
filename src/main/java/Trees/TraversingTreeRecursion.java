@@ -55,6 +55,12 @@ class TraverseTree{
 			System.out.print(" " + node.data);
 		}
 	}
+	
+	int countNodes(TraverseNode root) {
+		if (root == null) return 0;
+		
+		return 1 + countNodes(root.left) + countNodes(root.right);
+	}
 }
 
 public class TraversingTreeRecursion {
@@ -74,5 +80,7 @@ public class TraversingTreeRecursion {
 		
 		//Post-order Traversal
 		tree.postOrderTraversal(node);
+		
+		System.out.println("\n " + tree.countNodes(node));
 	}
 }

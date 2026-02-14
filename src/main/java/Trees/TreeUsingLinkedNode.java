@@ -32,20 +32,6 @@ class TreeImplementation{
 		return root;
 	}
 	
-	void printTree(TreeNode root){
-		if(root == null) return;
-		
-		Queue<TreeNode> queue = new LinkedList<>();
-		queue.offer(root);
-		
-		while (!queue.isEmpty()){
-			TreeNode node = queue.poll();
-			System.out.print(node.data + " ");
-			
-			if (node.left != null) queue.offer(node.left);
-			if (node.right != null) queue.offer(node.right);
-		}
-	}
 }
 
 public class TreeUsingLinkedNode {
@@ -53,6 +39,5 @@ public class TreeUsingLinkedNode {
 		TreeImplementation tree = new TreeImplementation();
 		Scanner scanner = new Scanner(System.in);
 		TreeNode root = tree.createTree(scanner, true);
-		tree.printTree(root);
 	}
 }

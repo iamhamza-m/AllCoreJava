@@ -47,7 +47,7 @@ public class TreeUdemyImplementation {
 	}
 	
 	static void main(String[] args) {
-		int[] values = {1, 2, 3, 4, 5, 6};
+		int[] values = {1,3,4,5,67,2,1,3,1};
 		TreeLinked root = buildTree(values);
 		traverse(root);
 	}

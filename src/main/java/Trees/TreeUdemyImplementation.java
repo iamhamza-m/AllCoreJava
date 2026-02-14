@@ -15,11 +15,6 @@ class TreeLinked {
 }
 
 public class TreeUdemyImplementation {
-	static void main(String[] args) {
-		int[] values = {1, 2, 3, 4, 5, 6};
-		TreeLinked root = buildTree(values);
-	}
-	
 	static TreeLinked buildTree(int @NotNull [] values) {
 		if (values.length == 0) return null;
 		
@@ -31,7 +26,6 @@ public class TreeUdemyImplementation {
 		while (i < values.length) {
 			TreeLinked current = queue.poll();
 			// Left child
-			assert current != null;
 			current.left = new TreeLinked(values[i++]);
 			queue.offer(current.left);
 			if (i < values.length) {
@@ -42,5 +36,19 @@ public class TreeUdemyImplementation {
 		}
 		
 		return root;
+	}
+	
+	static void traverse(TreeLinked node){
+		if(node != null){
+			System.out.print(" " + node.value);
+			traverse(node.left);
+			traverse(node.right);
+		}
+	}
+	
+	static void main(String[] args) {
+		int[] values = {1, 2, 3, 4, 5, 6};
+		TreeLinked root = buildTree(values);
+		traverse(root);
 	}
 }

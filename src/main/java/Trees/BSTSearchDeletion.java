@@ -1,8 +1,5 @@
 package Trees;
 
-import org.w3c.dom.Node;
-
-import java.util.Map;
 import java.util.Scanner;
 
 class BSTSearchDeletionNode{
@@ -20,7 +17,7 @@ class BSTSearchDeletionMethods{
 		
 		if(data < root.data)
 			root.left = buildTree(root.left, data);
-		if(data > root.data)
+		else if(data > root.data)
 			root.right = buildTree(root.right, data);
 		
 		return root;

@@ -125,6 +125,14 @@ class BSTSearchDeletionMethods{
 		else if(key < root.data)  return ifPresent(root.left, key);
 		else return ifPresent(root.right, key);
 	}
+	
+	void traverse(BSTSearchDeletionNode root){
+		if(root != null){
+			traverse(root.left);
+			traverse(root.right);
+			System.out.print(root.data + " ");
+		}
+	}
 }
 
 public class BSTSearchDeletion {
@@ -136,9 +144,13 @@ public class BSTSearchDeletion {
 		
 		System.out.println("Total nodes in a tree are : " + tree.countNodes(root));
 		System.out.println("Height of the tree is : " + tree.height(root));
-		System.out.println("The val is present " + tree.ifPresent(root, 13));
+		System.out.printf("\nNode %d is present %b", 13, tree.ifPresent(root, 13));
+		System.out.println("\nBefore deletion");
+		tree.traverse(root);
 		root = tree.deleteNode(root, 13);
-		System.out.println("The val is present " + tree.ifPresent(root, 13));
+		System.out.println("\nAfter deletion");
+		tree.traverse(root);
+		System.out.printf("\nNode %d is present %b", 13, tree.ifPresent(root, 13));
 	}
 
 }

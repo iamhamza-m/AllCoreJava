@@ -51,10 +51,19 @@ public class TreeUdemyImplementation {
 		return 1 + countNodes(root.left) + countNodes(root.right);
 	}
 	
+	static int countHeight(TreeLinked root){
+		int x = 0, y =0 ;
+		if(root == null) return 0;
+		x = countHeight(root.left);
+		y = countHeight(root.right);
+		return 1 + Math.max(x, y);
+	}
+	
 	static void main(String[] args) {
 		int[] values = {1,3,4,5,67,2,1,3,1};
 		TreeLinked root = buildTree(values);
 		traverse(root);
-		System.out.println("\n Total nodes are " + countNodes(root));
+		System.out.println("\nTotal nodes are " + countNodes(root));
+		System.out.println("Height of the tree is " + countHeight(root));
 	}
 }

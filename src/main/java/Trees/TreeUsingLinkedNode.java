@@ -1,19 +1,17 @@
 package Trees;
 
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Scanner;
 
 class TreeNode{
 	int data;
-	TreeNode left, right;
+	TreeNodeGenerate left, right;
 	TreeNode(int data){
 		this.data = data;
 	}
 }
 
 class TreeImplementation{
-	TreeNode createTree(Scanner scanner, boolean isRoot){
+	TreeNodeGenerate createTree(Scanner scanner, boolean isRoot){
 		System.out.println(isRoot ? "Enter the root node : " : "");
 		int data = scanner.nextInt();
 		
@@ -21,7 +19,7 @@ class TreeImplementation{
 			return null;
 		}
 		
-		TreeNode root = new TreeNode(data);
+		TreeNodeGenerate root = new TreeNodeGenerate(data);
 		
 		System.out.print("Add left node for " + data);
 		root.left = createTree(scanner, false);
@@ -32,7 +30,7 @@ class TreeImplementation{
 		return root;
 	}
 	
-	int countNodes(TreeNode root) {
+	int countNodes(TreeNodeGenerate root) {
 		if (root == null) return 0;
 		
 		return 1 + countNodes(root.left) + countNodes(root.right);
@@ -44,7 +42,7 @@ public class TreeUsingLinkedNode {
 	static void main(String[] args) {
 		TreeImplementation tree = new TreeImplementation();
 		Scanner scanner = new Scanner(System.in);
-		TreeNode root = tree.createTree(scanner, true);
+		TreeNodeGenerate root = tree.createTree(scanner, true);
 		System.out.println(" \n " + tree.countNodes(root));
 	}
 }

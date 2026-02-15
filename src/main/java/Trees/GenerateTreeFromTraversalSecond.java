@@ -39,22 +39,10 @@ public class GenerateTreeFromTraversalSecond {
 		int leftSubtreeSize = inorderIndex - inLeft;
 		
 		// Build left subtree
-		root.left = build(
-				preorder,
-				preIndex + 1,
-				inLeft,
-				inorderIndex - 1,
-				inorderMap
-		);
+		root.left = build(preorder, preIndex + 1, inLeft, inorderIndex - 1, inorderMap);
 		
 		// Build right subtree
-		root.right = build(
-				preorder,
-				preIndex + 1 + leftSubtreeSize,
-				inorderIndex + 1,
-				inRight,
-				inorderMap
-		);
+		root.right = build(preorder, preIndex + 1 + leftSubtreeSize, inorderIndex + 1, inRight, inorderMap);
 		
 		return root;
 	}
